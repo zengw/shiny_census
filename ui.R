@@ -17,17 +17,16 @@ shinyUI(fluidPage(
                  img(src="bigorb.png",height=50,width=50),
                  "Shiny is a product of", 
                    span("Rstudio", style="color:blue"),
-                 helpText("Create demographic maps with information from the 2010 US census. "),
-                 fluidRow(
-                   column(12,
-                          selectInput("select", 
-                                      label=strong("Select a Variable to display"),
-                                     choices=list("Percent White", "Percent Black"),
-                                         selected="Percent White"))),
-                 fluidRow(
-                   column(12,
-                          sliderInput("slider1",label=strong("Range of Interest"),
-                                      min=0, max=100,value=c(0,100))))
+                 selectInput("var", 
+                             label = "Choose a variable to display",
+                             choices = c("Percent White", "Percent Black",
+                                         "Percent Hispanic", "Percent Asian"),
+                             selected = "Percent White"),
+                 
+                 sliderInput("range", 
+                             label = "Range of interest:",
+                             min = 0, max = 100, value = c(0, 100))
+    
                  
                 ),
     
@@ -42,10 +41,10 @@ shinyUI(fluidPage(
                    href="http://www.google.com", target="_blank")),
               h3("Features"),
               p("* Build useful webpages"),
-              p("*Shiny application",
-                strong("spreadsheets"))
+              p("* Shiny application",
+                strong("spreadsheets")),
   
-              )
+             plotOutput("map") )
   )
 
 ))
